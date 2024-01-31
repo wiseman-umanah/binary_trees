@@ -1,44 +1,37 @@
 #include "binary_trees.h"
 
-/**
- * num_of_elem - calculate the number of nodes in tree
- * @tree: the tree to use
- * Return: the size of the tree
-*/
 
-double num_of_elem(const binary_tree_t *tree)
-{
-	int num;
-
-	if (tree == NULL)
-		return (0);
-	num = 0;
-	num += num_of_elem(tree->left);
-	num += num_of_elem(tree->right);
-	num++;
-	return (num);
+size_t binary_tree_depth(const binary_tree_t *node) {
+    int depth = 0;
+    while (node != NULL) {
+        depth++;
+        node = node->left;
+    }
+    return depth;
 }
 
-/**
- * binary_tree_is_perfect - checks if tree is perfect
- * @tree:  the tree to check
- * Return: true if it's a perfect binary tree, false otherwise
-*/
 
-int binary_tree_is_perfect(const binary_tree_t *tree)
-{
-	int num, i, res, height;
+int is_perfect(const binary_tree_t *tree, int depth, int level) {
+    if (tree == NULL) {
+        return 1;
+    }
 
-	res = 1;
-	if (tree == NULL)
-		return (0);
-	num = num_of_elem(tree);
-	height = log2((double)num);
-	height++;
-	for (i = 0; i < height; i++)
-		res *= 2;
-	if (res - 1 != num)
-		return (0);
-	else
-		return (1);
+
+    if (tree->left == NULL && tree->right == NULL) {
+        return (depth == level + 1);
+    }
+
+
+    if (tree->left == NULL || tree->right == NULL) {
+        return 0;
+    }
+
+    return is_perfect(tree->left, depth, level + 1) &&
+           is_perfect(tree->right, depth, level + 1);
+}
+
+
+int binary_tree_is_perfect(const binary_tree_t *tree) {
+    int d = binary_tree_depth(tree);
+    return is_perfect(tree, d, 0);
 }
