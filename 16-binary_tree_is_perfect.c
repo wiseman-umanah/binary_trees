@@ -1,5 +1,10 @@
 #include "binary_trees.h"
 
+/**
+ * num_of_elem - calculate the number of nodes in tree
+ * @tree: the tree to use
+ * Return: the size of the tree
+*/
 
 double num_of_elem(const binary_tree_t *tree)
 {
@@ -11,8 +16,14 @@ double num_of_elem(const binary_tree_t *tree)
 	num += num_of_elem(tree->left);
 	num += num_of_elem(tree->right);
 	num++;
-	return(num);
+	return (num);
 }
+
+/**
+ * binary_tree_is_perfect - checks if tree is perfect
+ * @tree:  the tree to check
+ * Return: true if it's a perfect binary tree, false otherwise
+*/
 
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {

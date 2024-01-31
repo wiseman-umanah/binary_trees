@@ -1,5 +1,11 @@
 #include "binary_trees.h"
 
+/**
+ * binary_tree_uncle - Finds the uncle of a child node
+ * @node: the  child node
+ * Return: returns the uncle node of child
+*/
+
 binary_tree_t *binary_tree_uncle(binary_tree_t *node)
 {
 	binary_tree_t *uncle;
