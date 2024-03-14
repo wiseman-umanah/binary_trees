@@ -1,17 +1,35 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_balance - checks if tree is balanced
- * @tree:  root of the binary tree to check balance for
- * Return: 0 if empty, -1 if partially filled, 2 if complete
+ * binary_tree_height - Finds the height of a tree
+ * @tree: the tree to use
+ * Return: the height of the tree
 */
 
+size_t binary_tree_height(const binary_tree_t *tree)
+{
+	size_t height_l = 0;
+	size_t height_r = 0;
+
+	if (!tree)
+		return (0)
+	height_l = tree->left ? 1 + binary_tree_height(tree->left) : 0;
+	height_r = tree->right ? 1 + binary_tree_height(tree->right) : 0;
+	return (height_l > height_r ? height_l : height_r);
+}
+
+
+/**
+ * binary_tree_balance - Balance the tree
+ * @tree: the tree to use
+ * Return: The balance factp
+*/
 int binary_tree_balance(const binary_tree_t *tree)
 {
-	if (tree->left == NULL && tree->right == NULL)
-		return (0);
-	else if (tree->left == NULL || tree->right == NULL)
-		return (-1);
-	else
-		return (2);
+	int left, right;
+
+	left = right = 1;
+	left += binary_tree_height(tree->left);
+	right += binary_tree_height(tree->right);
+	return (left - right);
 }
